@@ -1,0 +1,16 @@
+
+trigger: none
+
+pool:
+  name: 'cicd'
+
+steps:
+- checkout: self
+
+- task: AWSCLI@1
+  displayName: 'Test AWS Authentication'
+  inputs:
+    awsCredentials: 'aws-terraform-connection'
+    regionName: 'ap-southeast-2'
+    awsCommand: 'sts'
+    awsSubCommand: 'get-caller-identity'
